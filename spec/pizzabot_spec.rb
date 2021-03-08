@@ -55,11 +55,27 @@ RSpec.describe "PizzaBot" do
       pizzabot.delivery_instructions
     end
 
+    context 'when neighborhood input is invalid' do
+      let(:neighborhood) { 'something' }
+
+      it 'raises an error' do
+        expect(delivery_instructions).to eq("Incorrect Input")
+      end
+    end
+
+    context 'when location input is invalid' do
+      let(:locations) { "(1, 3) (a, 5)" }
+
+      it 'raises an error' do
+        expect(delivery_instructions).to eq("Incorrect Input")
+      end
+    end
+
     context 'when a location is out of range' do
       let(:locations) { "(1, 3) (4, 5)" }
 
       it 'returns bad location message' do
-        expect(delivery_instructions).to eq('Sorry, Bad Location!')
+        expect(delivery_instructions).to eq('Sorry, one or more of location is out of range!')
       end
     end
 

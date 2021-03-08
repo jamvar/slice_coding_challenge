@@ -11,12 +11,15 @@ class PizzaBot
   end
 
   def delivery_instructions
-    return 'Sorry, Bad Location!' if PizzaBotHelper.out_of_range?(neighborhood, locations)
+    return 'Incorrect Input' unless valid_neighborhood && valid_locations
 
-    drive_starting_point = [0,0]
+    return 'Sorry, one or more of location is out of range!' if PizzaBotHelper.out_of_range?(neighborhood, locations)
+
+    drive_starting_point = [0, 0]
     @locations.unshift(drive_starting_point)
 
     delivery_instructions = ''
+
     @locations.each_cons(2) do |start_coord, stop_coord|
       delivery_instructions << get_directions(
         start_coord: start_coord,
@@ -40,5 +43,15 @@ class PizzaBot
              )
 
     "#{x_move}#{y_move}"
+  end
+
+  private
+
+  def valid_neighborhood
+    !neighborhood.nil? && neighborhood.is_a?(Array) && neighborhood.length == 2 && neighborhood != [0, 0]
+  end
+
+  def valid_locations
+    !locations.nil? && locations.is_a?(Array) && locations.flatten.length.even?
   end
 end

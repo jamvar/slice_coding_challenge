@@ -6,8 +6,8 @@ module PizzaBotHelper
   end
 
   def self.locations_in_array(locations)
-    locations.delete! '(' ')'
-    locations.split(' ').map(&:to_i).each_slice(2).to_a
+    locations.delete! '(' ')' ','
+    locations.split(' ').map { |l| l.to_i if l.to_i.to_s == l }.compact.each_slice(2).to_a
   end
 
   def self.horizontal_steps(start_x_coord:, stop_x_coord:)

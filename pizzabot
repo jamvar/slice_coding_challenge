@@ -9,6 +9,8 @@ def get_instructions(instruction_string)
   neighborhood_dimensions = instructions_array[0]
   delivery_locations = instructions_array[1]
 
+  return "Incorrect Input" if neighborhood_dimensions.nil? || delivery_locations.nil?
+
   instructions = PizzaBot.new(
                    neighborhood: neighborhood_dimensions,
                    locations: delivery_locations
