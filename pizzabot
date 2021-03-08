@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 # PizzaBot for slice pizza delivery
 
 class PizzaBot
@@ -75,7 +77,8 @@ class PizzaBot
 end
 
 def get_instructions(instruction_string)
-  # instruction_string = “5x5 (1, 3) (4, 4)”
+  return if instruction_string.nil?
+
   instructions_array = instruction_string.split(' ', 2)
   neighborhood_dimensions = instructions_array[0]
   delivery_locations = instructions_array[1]
@@ -86,4 +89,5 @@ def get_instructions(instruction_string)
                  ).delivery_instructions
 end
 
-get_instructions("5x5 (0, 0) (1, 3) (4, 4) (4, 2) (4, 2) (0, 1) (3, 2) (2, 3) (4, 1)")
+# get_instructions("5x5 (0, 0) (1, 3) (4, 4) (4, 2) (4, 2) (0, 1) (3, 2) (2, 3) (4, 1)")
+puts get_instructions(ARGV[0])
