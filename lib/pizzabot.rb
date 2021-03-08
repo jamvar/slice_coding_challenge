@@ -5,11 +5,13 @@ require_relative 'pizzabot_helper'
 class PizzaBot
   attr_reader :locations, :neighborhood
 
+  # Initializes PizzaBot with neighborhood <Array> and locations <Array>
   def initialize(neighborhood:, locations:)
     @neighborhood = PizzaBotHelper.dimensions_in_array(neighborhood)
     @locations = PizzaBotHelper.locations_in_array(locations)
   end
 
+  # Returns the delivery_instructions string with compass directions
   def delivery_instructions
     return 'Incorrect Input' unless valid_neighborhood && valid_locations
 
@@ -31,6 +33,7 @@ class PizzaBot
     delivery_instructions
   end
 
+  # Returns the compass directions between the given coordinates
   def get_directions(start_coord:, stop_coord:)
     x_move = PizzaBotHelper.horizontal_steps(
                start_x_coord: start_coord[0],
