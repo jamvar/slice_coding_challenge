@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'sinatra'
 require_relative 'lib/pizzabot'
 
 def get_instructions(instruction_string)
@@ -17,4 +18,8 @@ def get_instructions(instruction_string)
                  ).delivery_instructions
 end
 
-puts get_instructions(ARGV[0])
+set :port, 9292
+
+post '/pizzabot' do
+  get_instructions(request.body.read)
+end
